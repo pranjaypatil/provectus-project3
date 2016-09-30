@@ -2,10 +2,11 @@ from __future__ import print_function
 from pyspark import  SparkContext,SparkConf
 import tensorflow as tf
 import tensorflow as ops
-import os
-
-
+from StringIO import StringIO
+from PIL import Image
 import numpy as np
+import math
+import os
 
 
 sc = SparkContext(conf=SparkConf().setAppName("MalwareClassifier"))
@@ -23,7 +24,8 @@ def main():
     path = imageFileName.map(lambda doc: ("s3n://eds-uga-csci8360/data/project3/images/" + doc + ".png"))
     filePath = path.reduce(lambda str1, str2: str1 + "," + str2)
     imageFileCollect = sc.binaryFiles(filePath, 36)
-    imageContent=imageFileCollect.map(lambda (x, y): (os.path.splitext(os.path.basename(x))[0].encode('utf-8'), y))
+    imageContent = imageFileCollect.map(lambda (x,y): (os.path.splitext(os.path.basename(x))[0].encode('utf-8'),(np.asarray(Image.open(StringIO(y))))))
+    #imageContent=imageFileCollect.map(lambda (x, y): (os.path.splitext(os.path.basename(x))[0].encode('utf-8'), y))
 
 
     #byteFile = imageFileName.map(lambda doc: ("s3n://eds-uga-csci8360/data/project3/images/" + doc + ".png"))
