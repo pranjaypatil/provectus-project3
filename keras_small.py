@@ -61,7 +61,11 @@ def create_model():
     cnn_model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
     return cnn_model
 
-model = create_model()
-model.fit(X_pd_train, label_train_ohe, validation_data=(X_pd_test, label_test_ohe), nb_epoch=100,          batch_size=10, verbose=2)
-acc = model.evaluate(X_pd_test, label_test_ohe, verbose=0)
-print 'accuracy %.2f' % (acc[1]*100)
+def main():
+    model = create_model()
+    model.fit(X_pd_train, label_train_ohe, validation_data=(X_pd_test, label_test_ohe), nb_epoch=100,          batch_size=10, verbose=2)
+    acc = model.evaluate(X_pd_test, label_test_ohe, verbose=0)
+    print 'accuracy %.2f' % (acc[1]*100)
+
+if __name__ == '__main__':
+    main()
