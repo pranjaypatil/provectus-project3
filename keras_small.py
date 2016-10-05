@@ -77,20 +77,21 @@ def create_model():
     # amax = Adamax(lr=0.002, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=0.0)
     #nadam = Nadam(lr=0.002, beta_1=0.9, beta_2=0.999, epsilon=1e-08, schedule_decay=0.004)
 
-    cnn_model.compile(loss='categorical_crossentropy', optimizer="Adagrad", metrics=['accuracy'])
+    cnn_model.compile(loss='categorical_crossentropy', optimizer=ad, metrics=['accuracy'])
     return cnn_model
 
 def getLabels(labels):
     f = open("Output",'w')
     for l in labels:
-        f.write(l)
+        x=str(l)
+        f.write(x+"\n")
     f.close()
 
 def main():
     model = create_model()
     model.fit(X_pd_train, label_train_ohe, nb_epoch=100, batch_size=10, verbose=2)
     # , validation_data=(X_pd_train, label_train_ohe)
-    pri = model.predict(X_pd_test, batch_size=32, verbose=1)
+    pri = model.predict_classes(X_pd_test, batch_size=32, verbose=1)
 
     acc = model.evaluate(X_pd_test, label_test_ohe, verbose=0)
     print 'accuracy %.2f' % (acc[1] * 100)
