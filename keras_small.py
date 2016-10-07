@@ -60,7 +60,11 @@ label_test_ohe = process_labels('./data/y_small_test.txt')
 
 def create_model():
     cnn_model = Sequential()
+    
     cnn_model.add(Convolution2D(32, 3, 3, activation='relu', dim_ordering='tf', border_mode='same', input_shape=(32, 32, 3),  W_constraint=maxnorm(3), bias=True))
+    cnn_model.add(Convolution2D(32, 3, 3, activation='relu', dim_ordering='tf', border_mode='same', input_shape=(32, 32, 3),  W_constraint=maxnorm(3), bias=True))
+    
+    cnn_model.add(MaxPooling2D(pool_size=(2, 2)))
     cnn_model.add(Dropout(0.2))
     cnn_model.add(Convolution2D(32, 3, 3, activation='relu', border_mode='same', W_constraint=maxnorm(3), bias=True))
     cnn_model.add(MaxPooling2D(pool_size=(2, 2)))
@@ -68,6 +72,8 @@ def create_model():
     cnn_model.add(Dense(512, activation='relu', W_constraint=maxnorm(3)))
     cnn_model.add(Dropout(0.5))
     cnn_model.add(Dense(10, activation='softmax'))
+    
+    
     # sgd = SGD(lr=0.01)
     # sgd = SGD(lr=0.01, momentum=0.9, decay=(0.01/10), nesterov=False)
     # rms=RMSprop(lr=0.001, rho=0.9, epsilon=1e-08, decay=0.0)
