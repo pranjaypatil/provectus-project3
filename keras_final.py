@@ -60,35 +60,34 @@ label_train_ohe = process_labels('/home/ubuntu/y_train.txt')
 
 def create_model():
     cnn_model = Sequential()
-    #Conv1 
-    cnn_model.add(Convolution2D(32, 3, 3, activation='relu', dim_ordering='tf', border_mode='same', input_shape=(32, 32, 3),  W_constraint=maxnorm(3), bias=True))
-    
+    cnn_model.add(Convolution2D(32, 7, 3, activation='relu', dim_ordering='tf', border_mode='same', input_shape=(32, 32, 3),  W_constraint=maxnorm(3), bias=True))
+    cnn_model.add(Dropout(0.2))
     cnn_model.add(Convolution2D(32, 3, 3, activation='relu', border_mode='same', W_constraint=maxnorm(3), bias=True))
+    cnn_model.add(MaxPooling2D(pool_size=(3, 3)))
+    cnn_model.add(Dropout(0.2))
+    cnn_model.add(Convolution2D(64, 3, 3, activation='relu', border_mode='same', W_constraint=maxnorm(3), bias=True))
     cnn_model.add(MaxPooling2D(pool_size=(2, 2)))
     cnn_model.add(Dropout(0.2))
-    #Conv2
     cnn_model.add(Convolution2D(64, 3, 3, activation='relu', border_mode='same', W_constraint=maxnorm(3), bias=True))
     cnn_model.add(MaxPooling2D(pool_size=(2, 2)))
     cnn_model.add(Dropout(0.2))
-    cnn_model.add(Convolution2D(64, 3, 3, activation='relu', border_mode='same', W_constraint=maxnorm(3), bias=True))
+    cnn_model.add(Convolution2D(128, 2, 2, activation='relu', border_mode='same', W_constraint=maxnorm(3), bias=True))
     cnn_model.add(MaxPooling2D(pool_size=(2, 2)))
     cnn_model.add(Dropout(0.2))
     cnn_model.add(Flatten())
-    #Fully Connected Layer1
+    cnn_model.add(Dense(1024, activation='relu', W_constraint=maxnorm(3)))
+    cnn_model.add(Dropout(0.2))
     cnn_model.add(Dense(512, activation='relu', W_constraint=maxnorm(3)))
     cnn_model.add(Dropout(0.2))
-    #Fully Connected Layer2
-    cnn_model.add(Dense(64, activation='relu', W_constraint=maxnorm(3)))
-    cnn_model.add(Dropout(0.5))
     cnn_model.add(Dense(10, activation='softmax'))
     ad=Adagrad(lr=0.01, epsilon=1e-08, decay=0.0)
-  
+
 
     cnn_model.compile(loss='categorical_crossentropy', optimizer=ad, metrics=['accuracy'])
     return cnn_model
 
 def getLabels(labels):
-    f = open("Output2.txt",'w')
+    f = open("Output3.txt",'w')
     for l in labels:
         x=str(l)
         f.write(x+"\n")
@@ -97,7 +96,6 @@ def getLabels(labels):
 
 def main():
     model = create_model()
-    #Image data augmentation 
     datagen = ImageDataGenerator(
         featurewise_center=False,  # set input mean to 0 over the dataset
         samplewise_center=False,  # set each sample mean to 0
@@ -108,16 +106,13 @@ def main():
         width_shift_range=0.2,  # randomly shift images horizontally (fraction of total width)
         height_shift_range=0.2,  # randomly shift images vertically (fraction of total height)
         horizontal_flip=True,  # randomly flip images
-	vertical_flip=False) # randomly flip images
+	    vertical_flip=False) # randomly flip images
     datagen.fit(X_pd_train)
     model.fit_generator(datagen.flow(X_pd_train,label_train_ohe,
-                        batch_size=1096),
+                        batch_size=64),
                         samples_per_epoch=X_pd_train.shape[0],
-                        nb_epoch=2000)
+                        nb_epoch=1000)
     pri = model.predict_classes(X_pd_test, batch_size=64, verbose=2)
-
-    #acc = model.evaluate(X_pd_test, label_test_ohe, verbose=0)
-    #print 'accuracy %.2f' % (acc[1] * 100)
     getLabels(pri)
 
 
