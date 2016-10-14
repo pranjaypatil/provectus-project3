@@ -1,3 +1,6 @@
 1) Basics of Convolutional Neural Network - http://cs231n.github.io/convolutional-networks/#conv
 
 2)Delving Deep into Rectifiers: Surpassing Human-Level Performance on ImageNet Classification - https://arxiv.org/pdf/1502.01852.pdf
+
+3)Multi-GPU Implementation:https://github.com/tensorflow/tensorflow/tree/master/tensorflow/models/image/cifar10
+
