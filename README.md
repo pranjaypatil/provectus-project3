@@ -6,9 +6,9 @@ Image classification was a challenging project of Microsoft CIFAR10 where we wer
 The scripts used for this classification are described beow:
 
 - keras_final.py        : Reads and preprocessing data, model training and predicting testing data.
-- images_to_tfrecord.py : create tensor flow record format file from image data.
+- images_to_tfrecord.py : Create tensor flow record format file from image data.
 - multi_gpu.py          : Reads tensor flow record format file, image pre-processing and multi CPU training model.
-- mxnet_large.py        : Improved network and Image preprocessing than mxnet_small.py. CNN based on mxnet API for  GPU based training.
+- mxnet_large.py        : Convolutional Neural Network based on MXNet API, supports multiple GPUs.
 
 ##Problem Decsrition
 
@@ -25,13 +25,23 @@ The problem was to identify the category of large collecton of small images. Eac
 - ship
 - truck
 
-##Installations
+##How to Run
+Before executing any python script, the following dependenices need to be installed.
+- numpy
+- pillow
+- scipy
+- keras
+- mxnet (v. 0.7.0)
+- tensorflow (v. 0.10 for keras and 0.11 for multi-gpu support)
+- CUDA (v. 7.5)
+- cuDNN(v. 5.1)
 
-Run init.sh for all required installations. This file installs the following:
+- **mxnet_large.py** - command to run:- python mxnet_large.py #of_gpus path_to_train_file path_to_test_file path_to_train_labels
+- __For Multi GPU using Tensorflow__
+  - run images_to_tfrecord.py
+  - run testimages_to_tfrecord.py
+  - run multi_gpu_tensorflow.py
+  - run multi_gpu_eval_tensorflow.py
 
-- Numpy
-- Keras
-- TensorFlow version 0.10  and 0.11
-- Cuda 7.5 tool kit
-- Cudnn library 5.1 for Cuda 7.5
-
+#Project Report
+Please refer to the project3_report.pdf file for a detailed overview of layers in various implementation of CNNs using different frameworks.
