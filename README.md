@@ -38,10 +38,14 @@ Before executing any python script, the following dependenices need to be instal
 __Execution Instructions__
 - **mxnet_large.py** - command to run:- python mxnet_large.py #of_gpus path_to_train_file path_to_test_file path_to_train_labels
 - __For Multi GPU using Tensorflow__
+run all using python \<filename> in the following order
   - run images_to_tfrecord.py
   - run testimages_to_tfrecord.py
   - run multi_gpu_tensorflow.py
   - run multi_gpu_eval_tensorflow.py
+- __Keras based classifiers__
+  run all files using python \<filename>
+  - keras_final.py and keras_without_aug.py
 
 ##Project Report
 Please refer to the project3_report.pdf file for a detailed overview of layers in various implementation of CNNs using different frameworks.
