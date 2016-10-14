@@ -21,7 +21,7 @@
 
 ###Yash Shrivastava
  - Research and design of Convolutional Neural Networks' layers
- - Research on Model (network) Engineering (Reffered various papers)
+ - Research on Model (network) Engineering (Referred various papers)
  - Research on Optimizers 
  - Contribution in mxnet_small.py file
  - Project documentation (Project Report)
