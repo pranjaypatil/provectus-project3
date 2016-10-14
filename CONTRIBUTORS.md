@@ -32,3 +32,4 @@
  - Implemented image classifier in DeepLearning4J
  - Improved keras classifier on GPU
  - Bug fixing, testing and optimizations
+ - Maintained README.MD File
