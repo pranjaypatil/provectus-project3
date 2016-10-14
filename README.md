@@ -2,13 +2,13 @@
 
 ##Overview
 
-Image classification was a challenging project of Microsoft CIFAR10 where we were asked to classify the images on the basis of 10 given classes.We applied Deep Learning using Tensor Flow and Keras.
+Image classification was a challenging project of Microsoft CIFAR10 where we were asked to classify the images on the basis of 10 given classes.We applied Deep Learning using Tensorflow, keras and MXNet.
 The scripts used for this classification are described beow:
 
-- keras_final.py        : Reads and preprocessing data, model training and predicting testing data.
-- images_to_tfrecord.py : Create tensor flow record format file from image data.
-- multi_gpu.py          : Reads tensor flow record format file, image pre-processing and multi CPU training model.
-- mxnet_large.py        : Convolutional Neural Network based on MXNet API, supports multiple GPUs.
+- keras_final.py          : Reads and preprocessing data, model training and predicting testing data with image augmentation.
+- keras_without_aug       : Classifier without image augmentation.
+- multi_gpu_tensorflow.py : Reads tensor flow record format file, image pre-processing and multi CPU training model.
+- mxnet_large.py          : Convolutional Neural Network based on MXNet API, supports multiple GPUs.
 
 ##Problem Description
 
@@ -36,7 +36,7 @@ Before executing any python script, the following dependenices need to be instal
 - CUDA (v. 7.5) and cuDNN(v. 5.1)
 
 __Execution Instructions__
-- **mxnet_large.py** - command to run:- python mxnet_large.py #of_gpus path_to_train_file path_to_test_file path_to_train_labels
+- **mxnet_large.py** - command to run:- python mxnet_large.py no_of_gpus path_to_train_file path_to_test_file path_to_train_labels
 - __For Multi GPU using Tensorflow__
 run all using python \<filename> in the following order
   - run images_to_tfrecord.py
