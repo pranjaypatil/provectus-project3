@@ -1,6 +1,6 @@
 # Image Classification on CIFAR 10
 
-##Overview
+## Overview
 
 Image classification was a challenging project of Microsoft CIFAR10 where we were asked to classify the images on the basis of 10 given classes.We applied Deep Learning using Tensorflow, keras and MXNet.
 The scripts used for this classification are described beow:
@@ -10,7 +10,7 @@ The scripts used for this classification are described beow:
 - multi_gpu_tensorflow.py : Reads tensor flow record format file, image pre-processing and multi CPU training model.
 - mxnet_large.py          : Convolutional Neural Network based on MXNet API, supports multiple GPUs.
 
-##Problem Description
+## Problem Description
 
 The problem was to identify the category of large collecton of small images. Each image is a 32x32 pixel with three color channels: standard RGB format. There were 60,000 images splitting as 50,000 images for training the model and 10,000 for testing. The whole dataset was around 300 MB. The class/category for an image to be classified were:
 
@@ -25,7 +25,7 @@ The problem was to identify the category of large collecton of small images. Eac
 - ship
 - truck
 
-##How to Run
+## How to Run
 Before executing any python script, the following dependenices need to be installed.
 - numpy
 - pillow
@@ -47,5 +47,5 @@ run all using python \<filename> in the following order
   run all files using python \<filename>
   - keras_final.py and keras_without_aug.py
 
-##Project Report
+## Project Report
 Please refer to the project3_report.pdf file for a detailed overview of layers in various implementation of CNNs using different frameworks.
